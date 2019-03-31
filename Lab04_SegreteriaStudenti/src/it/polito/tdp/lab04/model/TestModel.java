@@ -9,6 +9,10 @@ public class TestModel {
 		/*
 		 * 	Write here your test model
 		 */
+		//model.corsiPerNome();
+		for(String s:model.corsiNomeAll()) {
+			System.out.println(s);
+		}
 
 	}
 
