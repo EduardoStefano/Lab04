@@ -4,20 +4,12 @@ import java.util.LinkedList;
 import java.util.List;
 
 import it.polito.tdp.lab04.DAO.CorsoDAO;
+import it.polito.tdp.lab04.DAO.StudenteDAO;
 
 public class Model {
 	
 	CorsoDAO cdao = new CorsoDAO();
-	
-	public void corsi() {
-		cdao.getTuttiICorsi();
-	}
-	
-	public void corsiPerNome() {
-		for(Corso c:cdao.getTuttiICorsi()) {
-			System.out.println(c.getNome());
-		}
-	}
+	StudenteDAO sdao = new StudenteDAO();
 	
 	public List<String> corsiNomeAll(){
 		List<String> corsi = new LinkedList<String>();
@@ -25,6 +17,14 @@ public class Model {
 			corsi.add(c.getNome());
 		}
 		return corsi;
+	}
+	
+	public String nomeStudente(int matricola) {
+		return sdao.nomeStudenteMatricola(matricola);
+	}
+	
+	public String cognomeStudente(int matricola) {
+		return sdao.cognomeStudenteMatricola(matricola);
 	}
 
 }

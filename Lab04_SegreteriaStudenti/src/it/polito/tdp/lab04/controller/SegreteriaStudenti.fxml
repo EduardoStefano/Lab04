@@ -51,22 +51,22 @@
                         <Insets left="20.0" top="5.0" />
                      </HBox.margin>
                   </Label>
-                  <TextField prefHeight="31.0" prefWidth="86.0">
+                  <TextField fx:id="txtStudente" prefHeight="31.0" prefWidth="86.0">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <CheckBox mnemonicParsing="false" prefHeight="30.0" prefWidth="28.0">
+                  <CheckBox fx:id="chkMatricola" mnemonicParsing="false" onAction="#doCompleta" prefHeight="30.0" prefWidth="28.0">
                      <HBox.margin>
                         <Insets left="5.0" top="5.0" />
                      </HBox.margin>
                   </CheckBox>
-                  <TextField>
+                  <TextField fx:id="txtNome">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin>
                   </TextField>
-                  <TextField>
+                  <TextField fx:id="txtCognome">
                      <HBox.margin>
                         <Insets top="5.0" />
                      </HBox.margin>

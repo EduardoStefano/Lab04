@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 
 public class SegreteriaStudentiController {
 	
@@ -37,6 +39,18 @@ public class SegreteriaStudentiController {
 
     @FXML
     private Button btnReset;
+    
+    @FXML
+    private TextField txtStudente;
+    
+    @FXML
+    private TextField txtNome;
+
+    @FXML
+    private TextField txtCognome;
+    
+    @FXML
+    private CheckBox chkMatricola;
 
     @FXML
     void doCercaCorsi(ActionEvent event) {
@@ -57,6 +71,23 @@ public class SegreteriaStudentiController {
     void doReset(ActionEvent event) {
 
     }
+    
+    @FXML
+    void doCompleta(ActionEvent event) {
+    	int matricola = 0;
+    	try {
+    		matricola = Integer.parseInt(txtStudente.getText());
+    	}
+    	catch(NumberFormatException e) {
+    		
+    	}
+    	
+    	if(model.nomeStudente(matricola)!=null && model.cognomeStudente(matricola)!=null) {
+    		txtNome.appendText(model.nomeStudente(matricola));
+    		txtCognome.appendText(model.cognomeStudente(matricola));
+    	}
+    		
+    }
 
     @FXML
     void initialize() {
@@ -65,6 +96,10 @@ public class SegreteriaStudentiController {
         assert btnCercaCorsi != null : "fx:id=\"btnCercaCorsi\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
         assert btnIscrivi != null : "fx:id=\"btnIscrivi\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
         assert btnReset != null : "fx:id=\"btnReset\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
+        assert txtStudente != null : "fx:id=\"txtStudente\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
+        assert txtNome != null : "fx:id=\"txtNome\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
+        assert txtCognome != null : "fx:id=\"txtCognome\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
+        assert chkMatricola != null : "fx:id=\"chkMatricola\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
     }
     
     public void setModel(Model model) {
