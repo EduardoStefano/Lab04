@@ -140,4 +140,52 @@ public class StudenteDAO {
 		return result;
 	}
 	
+	/*SELECT corso.nome FROM iscrizione, studente, corso
+	WHERE iscrizione.matricola=studente.matricola
+	AND corso.codins=iscrizione.codins
+	AND iscrizione.matricola='146101'*/
+	public String corsiCheSegueUnoStudente(int matricola){
+		String corsiSeguiti="";
+		String sql = "SELECT corso.nome FROM iscrizione, studente, corso " + 
+					 "WHERE iscrizione.matricola=studente.matricola " + 
+			     	 "AND corso.codins=iscrizione.codins " + 
+				     "AND iscrizione.matricola=?";
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, matricola);
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				corsiSeguiti+=rs.getString(1).trim()+"\n";
+			}
+		}
+		catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return corsiSeguiti;
+	}
+	
+	/*SELECT matricola FROM studente 
+	WHERE studente.matricola='5'*/
+	public boolean studentePresente(int matricola) {
+		boolean trovato=false;
+		String sql = "SELECT matricola FROM studente " + 
+					 "WHERE studente.matricola=?";
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setInt(1, matricola);
+			ResultSet rs = st.executeQuery();
+			if(rs.next()) {
+				trovato=true;
+			}
+		}
+		catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return trovato;
+		
+	}
+	
+	
 }

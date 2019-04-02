@@ -11,7 +11,8 @@ public class TestModel {
 		 */
 		//model.corsiPerNome();
 		//System.out.println(model.nomeStudente(146101));
-		System.out.println(model.studentiDaCorso("Gestione dei progetti"));
+		//System.out.println(model.studentiDaCorso("Gestione dei progetti"));
+		System.out.println(model.corsiSeguitiDaStudente(146101));
 
 	}
 

@@ -34,5 +34,13 @@ public class Model {
 		}
 		return result;
 	}
+	
+	public String corsiSeguitiDaStudente(int matricola) {
+		return sdao.corsiCheSegueUnoStudente(matricola);
+	}
+	
+	public boolean trovaStudente(int matricola) {
+		return sdao.studentePresente(matricola);
+	}
 
 }

@@ -58,7 +58,26 @@ public class SegreteriaStudentiController {
 
     @FXML
     void doCercaCorsi(ActionEvent event) {
-    	
+    	txtResult.clear();
+    	int matricola=-1;
+    	try {
+    		matricola = Integer.parseInt(txtStudente.getText());
+    	}
+    	catch(NumberFormatException e) {
+    		txtResult.appendText("Immettere un valore valido");
+    		return;
+    	}
+    	if(model.trovaStudente(matricola)==false) {
+    		txtResult.appendText("Studente inesistente");
+    		return;
+    	}
+    	String result=model.corsiSeguitiDaStudente(matricola);
+    	if(result=="") {
+    		txtResult.appendText("Studente non segue corsi");
+    	}
+    	else {
+    		txtResult.appendText(model.corsiSeguitiDaStudente(matricola));
+    	}
     }
 
     @FXML
@@ -89,6 +108,11 @@ public class SegreteriaStudentiController {
     	}
     	catch(NumberFormatException e) {
     		
+    	}
+    	
+    	if(model.trovaStudente(matricola)==false) {
+    		txtResult.appendText("Studente inesistente");
+    		return;
     	}
     	
     	if(model.nomeStudente(matricola)!=null && model.cognomeStudente(matricola)!=null) {
