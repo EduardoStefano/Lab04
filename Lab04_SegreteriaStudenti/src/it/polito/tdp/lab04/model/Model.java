@@ -42,5 +42,9 @@ public class Model {
 	public boolean trovaStudente(int matricola) {
 		return sdao.studentePresente(matricola);
 	}
+	
+	public boolean studenteIscrittoACorso(int matricola, String nomeCorso) {
+		return sdao.studenteIscrittoACorso(matricola, nomeCorso);
+	}
 
 }

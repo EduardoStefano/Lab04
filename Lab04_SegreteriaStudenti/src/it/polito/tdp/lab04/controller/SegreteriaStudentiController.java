@@ -60,6 +60,7 @@ public class SegreteriaStudentiController {
     void doCercaCorsi(ActionEvent event) {
     	txtResult.clear();
     	int matricola=-1;
+    	
     	try {
     		matricola = Integer.parseInt(txtStudente.getText());
     	}
@@ -67,10 +68,22 @@ public class SegreteriaStudentiController {
     		txtResult.appendText("Immettere un valore valido");
     		return;
     	}
+    	
     	if(model.trovaStudente(matricola)==false) {
     		txtResult.appendText("Studente inesistente");
     		return;
     	}
+    	
+    	if(!txtStudente.getText().equals("") && !txtNome.getText().equals("") && !txtCognome.getText().equals("")) {
+    		if(model.studenteIscrittoACorso(matricola, cmbCorsi.getValue())==true) {
+    			txtResult.appendText("Studente iscritto al corso");
+    		}
+    		else {
+    			txtResult.appendText("Studente non iscritto al corso");
+    		}
+    		return;
+    	}
+    	
     	String result=model.corsiSeguitiDaStudente(matricola);
     	if(result=="") {
     		txtResult.appendText("Studente non segue corsi");
@@ -94,7 +107,11 @@ public class SegreteriaStudentiController {
 
     @FXML
     void doReset(ActionEvent event) {
-
+    	txtResult.clear();
+    	txtNome.clear();
+    	txtCognome.clear();
+    	txtStudente.clear();
+    	chkMatricola.setSelected(false);
     }
     
     @FXML

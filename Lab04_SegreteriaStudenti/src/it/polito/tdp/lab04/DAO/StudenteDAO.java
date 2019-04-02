@@ -187,5 +187,35 @@ public class StudenteDAO {
 		
 	}
 	
+	/*SELECT studente.matricola, corso.codins FROM studente, iscrizione, corso
+	WHERE studente.matricola=iscrizione.matricola
+	AND corso.codins=iscrizione.codins
+	AND corso.nome='Economia aziendale'
+	AND studente.matricola='146101'*/
+	public boolean studenteIscrittoACorso(int matricola, String nomeCorso) {
+		boolean trovato=false;
+		String sql = "SELECT studente.matricola, corso.codins FROM studente, iscrizione, corso " + 
+		       	     "WHERE studente.matricola=iscrizione.matricola " + 
+				     "AND corso.codins=iscrizione.codins " + 
+				     "AND corso.nome=? " + 
+				     "AND studente.matricola=? ";
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, nomeCorso);
+			st.setInt(2, matricola);
+			ResultSet rs = st.executeQuery();
+			if(rs.next()) {
+				trovato=true;
+			}
+		}
+		catch(SQLException e) {
+			throw new RuntimeException(e);
+		}
+		
+		return trovato;
+		
+	}
+	
 	
 }
