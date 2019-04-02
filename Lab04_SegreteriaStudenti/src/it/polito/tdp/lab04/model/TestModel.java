@@ -10,7 +10,8 @@ public class TestModel {
 		 * 	Write here your test model
 		 */
 		//model.corsiPerNome();
-		System.out.println(model.nomeStudente(146101));
+		//System.out.println(model.nomeStudente(146101));
+		System.out.println(model.studentiDaCorso("Gestione dei progetti"));
 
 	}
 

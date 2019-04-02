@@ -87,7 +87,7 @@
                   </Button>
                </children>
             </HBox>
-            <TextArea prefHeight="136.0" prefWidth="518.0" />
+            <TextArea fx:id="txtResult" prefHeight="136.0" prefWidth="518.0" />
             <Button fx:id="btnReset" mnemonicParsing="false" onAction="#doReset" text="Reset">
                <VBox.margin>
                   <Insets left="20.0" />

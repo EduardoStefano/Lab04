@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -71,5 +72,72 @@ public class StudenteDAO {
 		}
 		
 	}
-
+	
+	public List<Integer> matricoleIscrittiAlCorso(String corsoSel){
+		String sql = "SELECT matricola FROM studente WHERE matricola=?";
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, corsoSel);
+			ResultSet rs = st.executeQuery();
+			List<Integer> iscritti = new ArrayList<Integer>();
+			while(rs.next()) {
+				iscritti.add(rs.getInt("matricola"));
+			}
+			return iscritti;
+		}
+		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	
+	}
+	
+	public List<Studente> StudenteDaMatricola(int matricola){
+		List<Studente> result = new LinkedList<Studente>();
+			String sql = "SELECT * FROM studente WHERE matricola=?";
+			try {
+				Connection conn = ConnectDB.getConnection();
+				PreparedStatement st = conn.prepareStatement(sql);
+				st.setInt(1, matricola);
+				ResultSet rs = st.executeQuery();
+				while(rs.next()) {
+					Studente c = new Studente(rs.getInt("matricola"), 
+							            rs.getString("cognome"),
+							            rs.getString("nome"),
+							            rs.getString("CDS"));
+					result.add(c);
+				}
+			}
+			catch (SQLException e) {
+				throw new RuntimeException(e);
+			}
+			
+			return result;
+	}
+	
+	public List<Studente> studentiCorso(String corso){
+		List<Studente> result = new LinkedList<Studente>();
+		String sql = "SELECT studente.* FROM iscrizione, corso, studente " + 
+				     "WHERE iscrizione.matricola = studente.matricola " + 
+				     "AND iscrizione.codins = corso.codins " + 
+				     "AND corso.nome=?";
+		try {
+			Connection conn = ConnectDB.getConnection();
+			PreparedStatement st = conn.prepareStatement(sql);
+			st.setString(1, corso);
+			ResultSet rs = st.executeQuery();
+			while(rs.next()) {
+				Studente c = new Studente(rs.getInt("matricola"), 
+			            rs.getString("cognome"),
+			            rs.getString("nome"),
+			            rs.getString("CDS"));
+				result.add(c);
+			}
+		}
+		catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+		return result;
+	}
+	
 }

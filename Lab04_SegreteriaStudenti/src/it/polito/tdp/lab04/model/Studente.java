@@ -68,5 +68,12 @@ public class Studente {
 	public void setCDS(String cDS) {
 		CDS = cDS;
 	}
+
+	@Override
+	public String toString() {
+		return String.format("matricola=%s nome=%s cognome=%s CDS=%s", matricola, nome, cognome, CDS);
+	}
+	
+	
 	
 }

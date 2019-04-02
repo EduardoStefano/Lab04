@@ -26,5 +26,13 @@ public class Model {
 	public String cognomeStudente(int matricola) {
 		return sdao.cognomeStudenteMatricola(matricola);
 	}
+	
+	public String studentiDaCorso(String corso){
+		String result="";
+		for(Studente stemp:sdao.studentiCorso(corso)) {
+			result+=stemp.getMatricola()+" "+stemp.getCognome()+" "+stemp.getNome()+" "+stemp.getCDS()+"1\n";
+		}
+		return result;
+	}
 
 }

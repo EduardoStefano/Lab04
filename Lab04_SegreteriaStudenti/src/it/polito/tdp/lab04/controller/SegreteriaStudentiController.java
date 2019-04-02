@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 public class SegreteriaStudentiController {
@@ -30,6 +31,9 @@ public class SegreteriaStudentiController {
     
     @FXML
     private Button btnCercaIscritti;
+    
+    @FXML
+    private TextArea txtResult;
 
     @FXML
     private Button btnCercaCorsi;
@@ -54,12 +58,14 @@ public class SegreteriaStudentiController {
 
     @FXML
     void doCercaCorsi(ActionEvent event) {
-
+    	
     }
 
     @FXML
     void doCercaIscritti(ActionEvent event) {
-
+    	txtResult.clear();
+    	String nomeCorso = cmbCorsi.getValue();
+    	txtResult.appendText(model.studentiDaCorso(nomeCorso));
     }
 
     @FXML
@@ -74,6 +80,9 @@ public class SegreteriaStudentiController {
     
     @FXML
     void doCompleta(ActionEvent event) {
+    	txtNome.clear();
+    	txtCognome.clear();
+    	txtResult.clear();
     	int matricola = 0;
     	try {
     		matricola = Integer.parseInt(txtStudente.getText());
@@ -85,6 +94,9 @@ public class SegreteriaStudentiController {
     	if(model.nomeStudente(matricola)!=null && model.cognomeStudente(matricola)!=null) {
     		txtNome.appendText(model.nomeStudente(matricola));
     		txtCognome.appendText(model.cognomeStudente(matricola));
+    	}
+    	else {
+    		txtResult.appendText("Studente non presente");
     	}
     		
     }
@@ -100,6 +112,7 @@ public class SegreteriaStudentiController {
         assert txtNome != null : "fx:id=\"txtNome\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
         assert txtCognome != null : "fx:id=\"txtCognome\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
         assert chkMatricola != null : "fx:id=\"chkMatricola\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
+        assert txtResult != null : "fx:id=\"txtResult\" was not injected: check your FXML file 'SegreteriaStudenti.fxml'.";
     }
     
     public void setModel(Model model) {

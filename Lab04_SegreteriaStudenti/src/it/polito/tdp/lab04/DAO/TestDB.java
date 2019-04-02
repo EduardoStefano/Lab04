@@ -11,8 +11,10 @@ public class TestDB {
 		 */
 		
 		CorsoDAO cdao = new CorsoDAO();
+		StudenteDAO sdao = new StudenteDAO();
 		cdao.getTuttiICorsi();
 		System.out.println("stampo i corsi:");
+		System.out.println(sdao.studentiCorso("Gestione dei progetti"));
 		
 
 	}
